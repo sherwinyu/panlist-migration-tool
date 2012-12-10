@@ -77,3 +77,60 @@ until completion.
 
   stc dev account
 
+
+  admins
+  list_ids
+  lists
+    list_id
+    list_name
+    active
+    status
+    public
+  owners
+    list_id
+    owner_netid)
+
+  subscribers
+    list_id
+
+
+panlist
+  habtm owners
+
+  panlist_id:integer
+  name:string
+  subscribers:string #flat text file in one string
+  public:bool
+  migrated:bool
+  belongs_to EliList
+
+EliList
+  name:string
+  owners:string (space delimited?)
+  subscribers:string
+  list_type:enum/integer/string {moderated, announcement, discussion}
+
+
+
+
+
+
+
+
+
+Operations:
+  given an owner id
+      find all lists for which he is an owner
+  given a list
+      find all owners, find all subscribers
+
+  Given an authenticated session, list of owners, list name, and options, 
+      create a new EliList
+    
+
+
+
+
+
+
+
