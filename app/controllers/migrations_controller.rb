@@ -4,6 +4,12 @@ class MigrationsController < ApplicationController
   end
 
   def dashboard
+    @owner = Owner.find_by_netid params[:netid]
+    unless @owner
+      flash.alert = "Invalid netid '#{params[:netid]}"
+      redirect_to :root
+    end
+    @lists = @owner.panlists
   end
 end
 

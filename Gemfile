@@ -21,6 +21,13 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'bootstrap-sass', '~> 2.2.1.1'
+
+group :development do
+  gem 'pry-rails'
+  gem "binding_of_caller"
+  gem "better_errors"
+end
 
 group :development, :test do 
   gem 'rspec'

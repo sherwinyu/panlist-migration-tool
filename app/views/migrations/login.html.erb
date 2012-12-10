@@ -1,1 +1,6 @@
 <h1> Login.html.erb </h1>
+<%= form_tag  "/dashboard" do  %>
+  <%= label_tag :netid, "NetId to authenticate as" %>
+  <%= text_field_tag :netid  %>
+  <%= submit_tag "go" %>
+<% end %>
