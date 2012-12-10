@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @panlist.name %>
+</p>
+
+<p>
+  <b>Subscribers:</b>
+  <%= @panlist.subscribers %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%= @panlist.public %>
+</p>
+
+<p>
+  <b>Migrated:</b>
+  <%= @panlist.migrated %>
+</p>
+
+
+<%= link_to 'Edit', edit_panlist_path(@panlist) %> |
+<%= link_to 'Back', panlists_path %>

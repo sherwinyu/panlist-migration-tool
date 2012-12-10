@@ -1,0 +1,29 @@
+<h1>Listing panlists</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Subscribers</th>
+    <th>Public</th>
+    <th>Migrated</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @panlists.each do |panlist| %>
+  <tr>
+    <td><%= panlist.name %></td>
+    <td><%= panlist.subscribers %></td>
+    <td><%= panlist.public %></td>
+    <td><%= panlist.migrated %></td>
+    <td><%= link_to 'Show', panlist %></td>
+    <td><%= link_to 'Edit', edit_panlist_path(panlist) %></td>
+    <td><%= link_to 'Destroy', panlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Panlist', new_panlist_path %>

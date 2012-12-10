@@ -1,0 +1,2 @@
+module PanlistsHelper
+end

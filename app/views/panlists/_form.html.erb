@@ -1,0 +1,33 @@
+<%= form_for(@panlist) do |f| %>
+  <% if @panlist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@panlist.errors.count, "error") %> prohibited this panlist from being saved:</h2>
+
+      <ul>
+      <% @panlist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :subscribers %><br />
+    <%= f.text_field :subscribers %>
+  </div>
+  <div class="field">
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </div>
+  <div class="field">
+    <%= f.label :migrated %><br />
+    <%= f.check_box :migrated %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
