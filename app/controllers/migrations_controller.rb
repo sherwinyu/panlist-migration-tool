@@ -1,4 +1,12 @@
 class MigrationsController < ApplicationController
+
+  def login
+  end
+
+  def dashboard
+  end
+end
+
 __END__
   # GET /panlists
   # GET /panlists.json

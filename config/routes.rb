@@ -5,6 +5,9 @@ Plmt::Application.routes.draw do
 
   resources :panlists
 
+  root to: 'migrations#login'
+  match '/dashboard', to: 'migrations#dashboard'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
