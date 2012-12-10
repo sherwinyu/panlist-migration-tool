@@ -70,7 +70,7 @@ until completion.
 
 
 
-# ACCESS NEEDED
+### NOTEZ BRO 
   application needs access to ahi
     for now just use fake data
   credentials for writing to google data
@@ -88,8 +88,7 @@ until completion.
     public
   owners
     list_id
-    owner_netid)
-
+    owner_netid
   subscribers
     list_id
 
@@ -111,7 +110,7 @@ EliList
   list_type:enum/integer/string {moderated, announcement, discussion}
 
 rails g scaffold panlist name:string subscribers:string public:boolean migrated:boolean 
-rails g owner
+rails g owner ???
 rails g scaffold elilist name:string subscribers:string owners:string list_type:string
 
 

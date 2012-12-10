@@ -1,4 +1,6 @@
 Plmt::Application.routes.draw do
+  resources :owners
+
   resources :elilists
 
   resources :panlists
