@@ -112,6 +112,7 @@ EliList
 
 rails g scaffold panlist name:string subscribers:string public:boolean migrated:boolean 
 rails g owner
+rails g scaffold elilist name:string subscribers:string owners:string list_type:string
 
 
 
@@ -130,6 +131,7 @@ Operations:
       create a new EliList
     
 
+Questions: will we import ahi.panlists into our system? how often do we do this? Or do we just dynamically query..?
 
 
 

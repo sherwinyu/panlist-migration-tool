@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @elilist.name %>
+</p>
+
+<p>
+  <b>Subscribers:</b>
+  <%= @elilist.subscribers %>
+</p>
+
+<p>
+  <b>Owners:</b>
+  <%= @elilist.owners %>
+</p>
+
+<p>
+  <b>List type:</b>
+  <%= @elilist.list_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_elilist_path(@elilist) %> |
+<%= link_to 'Back', elilists_path %>
