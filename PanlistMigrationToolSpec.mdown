@@ -110,6 +110,8 @@ EliList
   subscribers:string
   list_type:enum/integer/string {moderated, announcement, discussion}
 
+rails g scaffold panlist name:string subscribers:string public:boolean migrated:boolean 
+rails g owner
 
 
 
