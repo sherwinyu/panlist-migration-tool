@@ -1,0 +1,79 @@
+# Panlist Migration Tool
+
+## Project Description
+
+The Panlist Migration Tool (PMT) is designed to assist students in migrating their Panlists from the
+aging Panlist service. The Panlist service currently suffers from slow performance, an outdated user
+interface, and frequent reliability issues (unplanned outages).
+
+The PMT will not replicate any functionality of the Pantheon List Management Tool. Instead, it is
+intended to provide the minimum features nessecary to aid users to create a list in EliLists (Google
+Apps for EDU groups). 
+
+## Feature Descriptions
+
+### Logging in When a user accesses the site, they will be redirected to CAS for authentication. CAS
+will be the only authentication source for this application.
+
+### Home Page Once loged in, the user is presented with a home page, showing all lists that they are
+owners of. The user may click on a list, which takes them to the migration page for that list.
+
+### Migrating a List On the list migration page, the user is presented with a form to migrate the
+list. This form includes:
+
+* a list of current owners, with checkboxes next to their name to select owners of new list
+  * (may need to check for user existence in EliApps before allowing ownership migration)
+* a text field to set the name of the list when created as an EliList
+  * (prepopulated with current list name)
+* a text area filled with the current subscriber list, as stored in panlists
+  * this box should include all previous comments, which will be stripped after submission
+  * there should be an option to sort the list alphabetically (JS only is ok)
+* a set of options for list type: moderated, announcement, or discussion
+* a submit button
+
+Upon submitting the form, the Migration Tool will create a new EliList, transfer ownership and
+membership, and set the list-type appropriately.
+
+Undecided: for large lists (> ~1,000 members, require admin approval before migration)
+Undecided: allow user to migrate by re-inviting members instead of direct add (depending upon Google API
+support)
+
+### Administrators May Impersonate Users From the dashboard, an administrator may enter the NetID of
+a person to impersonate. This allows them to see lists owned by another user at-a-glance and manage
+them.
+
+### Undecided: List Deletion Two weeks after migration, send an email to the owner prompting them to
+log in and delete the list that was migrated
+
+## Scope
+
+The following items are currently out of scope, but may be brought in:
+* any panlist management features: subscription or un-subscription, activation/deactivation
+* administrator functions to detect large lists
+
+The following are out of scope:
+* application administration (ITS admins performing actions on behalf of other users)
+* any functionality related to the processing of mail messages (sending / receiving mail)
+* creating new panlists lists
+* managing multiple lists at once (mass edits)
+* any interactions with non-CAS users, i.e. people subscribed via non-yale-email addresses.
+
+## Planning
+
+### Technology We plan to implement this program using the Ruby on Rails framework, and provide test
+coverage using the RSpec framework.
+
+### Timing Based on the limited scope, this project is estimated to take approximate 80 person-hours
+to complete, and would aim to be completed by January 15th. This is assuming we can devote one STC
+Student Dev 10 hours / week for 5 weeks, and the 5 hours / week by the program manager (Adam Bray)
+until completion.
+
+
+
+# ACCESS NEEDED
+  application needs access to ahi
+    for now just use fake data
+  credentials for writing to google data
+
+  stc dev account
+

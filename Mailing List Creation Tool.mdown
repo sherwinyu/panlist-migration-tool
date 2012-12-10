@@ -1,0 +1,63 @@
+#Mailing List Creation Tool
+
+##Project Description
+
+The Mailing List Creation Tool (MLCT) is designed to make it easier for adminstrators to approve new mailing list requests, by automatically creating the requested list and modifying initial list settings as appropriate. The tool will support itegration with Yale's Service Now system and its request workflow, create EliLists and Mailman lists.
+
+The MLCT will not replicate any functionality of the Panlist, Mailman, or EliLists management interfaces. Instead, it is intended to provide the minimum features nessecary to simplify list creation.
+
+##Feature Descriptions
+
+###Authentication
+This application will support CAS authentication for interactive use, and possibly another system for integration with SN.
+
+###Authorization
+Authorization for this application only requires two levels, an administrator role (access to all features) and possibly another role for SN integration.
+
+###Home Page
+For interactive use, the administrator is presented with a home page, with options to create a new list or delete an existing list.
+
+###Creating a List Interactively
+On the list creation page, the administrator is presented with a form to create the list. This form includes:
+
+* a list of owners by NetID or email addresses
+* a set of options for list service: EliLists or Mailman
+* a set of options for list type: moderated, announcement, or discussion
+* a text area for including  the subscriber list, separated by commas and new lines
+  * lines starting with '#' will be treated as a comment and ignored during list creation
+* a submit button
+
+Upon submitting the form, the MLCT will create a new list, set ownership and membership, and set the list-type appropriately.
+
+###Deleting a List Interactively
+When an administrator navigates to the list deletion feature, they are presented with a form. This form contains:
+
+* a text field to enter the name of the list to be deleted
+* a text field to confirm the name of the list to be deleted
+* a submit button
+
+When submitted, the user is prompted with a popup informing them that deletion is permanent, and requesting confirmation. Upon confirmation, the list is deleted.
+
+###Non-Interactive List Creation / Deletion
+The application should provide an API over HTTP to provide automatic list creation (i.e. via ServiceNow). The same data as above must be provided (with the exception of list name confirmation on deletion.)
+
+Authentication for this API is undecided (pending discussions with ServiceNow team).
+
+##Scope
+
+The following items are currently out of scope, but may be brought in:
+* any mailing list management features not explicitly described:  e.g. subscription or un-subscription, activation/deactivation
+* administrator functions to detect large lists
+
+The following are out of scope:
+* any functionality related to the processing of mail messages (sending / receiving mail)
+* creating new Panlist lists
+* managing multiple lists at once (mass edits)
+
+##Planning
+
+###Technology
+We plan to implement this program using the Ruby on Rails framework, and provide test coverage using the RSpec framework.
+
+###Timing
+Based on the limited scope, this project is estimated to take approximate 60 person-hours to complete, and would aim to be completed by January 30th. This is assuming we can devote one STC Student Dev 10 hours / week for 5 weeks, and the 5 hours / week by the program manager (Adam Bray) until completion.
