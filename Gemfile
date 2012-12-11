@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 2.2.1.1'
+gem 'simple_form'
 
 group :development do
   gem 'pry-rails'
