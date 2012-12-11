@@ -7,6 +7,7 @@ Plmt::Application.routes.draw do
 
   root to: 'migrations#login'
   match '/dashboard', to: 'migrations#dashboard'
+  match '/dashboard/:netid', to: 'migrations#dashboard' 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
