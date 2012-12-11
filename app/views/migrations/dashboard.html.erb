@@ -1,4 +1,16 @@
-<h1> Dashboard.html.erb </h1>
-owner: <%= @owner.inspect %>
-<br>
-panlists: <%= @lists.inspect %>
+<h1> Welcome, <%= @owner.netid %> </h1>
+<h2> Here r ur lists lol </h2>
+
+<% @lists.each do |list|  %>
+  <div class="well">
+    list name: <%= list.name %> <br> 
+    <%= pluralize list.num_members, 'member' %> <br>
+    type: <%= list.public? ? 'Public' : 'Private' %>  <br>
+    owners: <%= list.owners.map &:netid %>
+
+  </div>
+
+<% end %>
+
+
+
