@@ -1,27 +1,13 @@
-<%= simple_form_for @elilist, html: {class: 'form-horizontal'} do |f| %>
-  <% if @elilist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@elilist.errors.count, "error") %> prohibited this elilist from being saved:</h2>
-
-      <ul>
-      <% @elilist.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="well">
+  <%= simple_form_for @elilist, html: {class: 'form-horizontal'} do |f| %>
+  
+    <%= f.input :name %>
+    <%= f.input :owners_arr, collection: @elilist.owners.map{|o| o.netid} , as: :check_boxes, label: 'List owners to migrate' %>
+    <%= f.input :members, as: :text %>
+    <%= f.input :list_type, collection: %w[Moderated Announcement Discussion], %>
+  
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <%= f.input :name %>
-  <%= f.input :members, collection: @elilist.members, as: :check_boxes %>
-  <%= f.input :owners, as: :text %>
-  <%= f.input :name %>
-
-
-  <div class="field">
-    <%= f.label :list_type %><br />
-    <%= f.text_field :list_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

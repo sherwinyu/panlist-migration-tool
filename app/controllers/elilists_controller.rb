@@ -26,11 +26,12 @@ class ElilistsController < ApplicationController
   def new
     @panlist = Panlist.find_by_id params[:panlist_id]
     unless @panlist
-      flash.alert = "Couldn't find panlist with id '#{params[:panlist_id]}'"
-      redirect_to '/dashboard'
+      flash.alert = "Couldn't find panlist with id \"#{params[:panlist_id]}\""
+      redirect_to '/dashboard/sy23' and return
     end
     @elilist = Elilist.new
-    @elilist.members = @panlist.members
+    @elilist.owners = @panlist.owners
+    @elilist.members = @panlist.members.join "\n"
     @elilist.name = @panlist.name
 
     respond_to do |format|
@@ -47,7 +48,12 @@ class ElilistsController < ApplicationController
   # POST /elilists
   # POST /elilists.json
   def create
-    @elilist = Elilist.new(params[:elilist])
+    list_params = params[:elilist]
+    list_params[:owners] = list_params.delete(:owners_arr).reject!{ |e| e.empty? } * "\n"
+    list_params[:subscribers] = list_params.delete(:members)
+
+    @elilist = Elilist.new list_params
+    binding.pry
 
     respond_to do |format|
       if @elilist.save

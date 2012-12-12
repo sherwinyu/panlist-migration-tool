@@ -21,6 +21,24 @@ class PanlistsController < ApplicationController
     end
   end
 
+  def migrate
+    @panlist = Panlist.find_by_id params[:id]
+    unless @panlist
+      flash.alert = "Couldn't find panlist with id \"#{params[:panlist_id]}\""
+      redirect_to '/dashboard/sy23' and return
+    end
+    @elilist = Elilist.new
+    @elilist.owners = @panlist.owners
+    @elilist.members = @panlist.members.join "\n"
+    @elilist.name = @panlist.name
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @elilist }
+    end
+
+  end
+
   # GET /panlists/new
   # GET /panlists/new.json
   def new

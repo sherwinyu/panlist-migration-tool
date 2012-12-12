@@ -7,7 +7,7 @@
     <%= pluralize list.num_members, 'member' %> <br>
     type: <%= list.public? ? 'Public' : 'Private' %>  <br>
     owners: <%= list.owners.map &:netid %>
-
+  <%= link_to "Manage this list", migrate_panlist_path(list) %>
   </div>
 
 <% end %>
