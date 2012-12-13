@@ -1,0 +1,191 @@
+--
+-- PostgreSQL database dump
+--
+
+SET client_encoding = 'SQL_ASCII';
+SET check_function_bodies = false;
+
+SET SESSION AUTHORIZATION 'postgres';
+
+--
+-- TOC entry 4 (OID 2200)
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 5 (OID 2103577)
+-- Name: list_id; Type: SEQUENCE; Schema: public; Owner: panlist
+--
+
+CREATE SEQUENCE list_id
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 6 (OID 2103577)
+-- Name: list_id; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE list_id FROM PUBLIC;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 7 (OID 2103579)
+-- Name: owners; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE owners (
+    list_id integer,
+    "owner" character varying(10)
+);
+
+
+--
+-- TOC entry 8 (OID 2103579)
+-- Name: owners; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE owners FROM PUBLIC;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 9 (OID 2103581)
+-- Name: lists; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE lists (
+    list_id integer,
+    list_name character varying(80),
+    active boolean,
+    status character varying(40),
+    public boolean
+);
+
+
+--
+-- TOC entry 10 (OID 2103581)
+-- Name: lists; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE lists FROM PUBLIC;
+GRANT ALL ON TABLE lists TO gfb6;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 11 (OID 2103583)
+-- Name: subscribers; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE subscribers (
+    list_name character varying(80),
+    email character varying(80)
+);
+
+
+--
+-- TOC entry 12 (OID 2103583)
+-- Name: subscribers; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE subscribers FROM PUBLIC;
+GRANT ALL ON TABLE subscribers TO gfb6;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 13 (OID 2103585)
+-- Name: admins; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE admins (
+    netid character varying(10),
+    "position" character varying(10),
+    email character varying(40)
+);
+
+
+--
+-- TOC entry 14 (OID 2103585)
+-- Name: admins; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE admins FROM PUBLIC;
+GRANT ALL ON TABLE admins TO gfb6;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 15 (OID 2103587)
+-- Name: requests; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE requests (
+    netid character varying(10),
+    list_name character varying(40),
+    purpose character varying(100),
+    "position" character varying(7),
+    public boolean,
+    serviced boolean,
+    allowed boolean,
+    reason text,
+    "action" character(6),
+    "last" date
+);
+
+
+--
+-- TOC entry 16 (OID 2103587)
+-- Name: requests; Type: ACL; Schema: public; Owner: panlist
+--
+
+REVOKE ALL ON TABLE requests FROM PUBLIC;
+GRANT ALL ON TABLE requests TO gfb6;
+
+
+SET SESSION AUTHORIZATION 'panlist';
+
+--
+-- TOC entry 17 (OID 8053307)
+-- Name: request_massive; Type: TABLE; Schema: public; Owner: panlist
+--
+
+CREATE TABLE request_massive (
+    listid integer NOT NULL,
+    netid character varying(14) NOT NULL,
+    request_date timestamp without time zone,
+    status boolean,
+    content text,
+    reason text,
+    public boolean
+);
+
+
+SET SESSION AUTHORIZATION 'postgres';
+
+--
+-- TOC entry 3 (OID 2200)
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'Standard public schema';
+
+
