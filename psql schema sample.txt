@@ -1,0 +1,64 @@
+               List of relations
+ Schema |      Name       |   Type   |  Owner  
+--------+-----------------+----------+---------
+ public | admins          | table    | panlist
+ public | list_id         | sequence | panlist
+ public | lists           | table    | panlist
+ public | owners          | table    | panlist
+ public | request_massive | table    | panlist
+ public | requests        | table    | panlist
+ public | subscribers     | table    | panlist
+(7 rows)
+
+panlist=> select * from lists limit 1;
+ list_id |   list_name   | active | status | public 
+---------+---------------+--------+--------+--------
+    4010 | directorslist | t      | alive  | f
+(1 row)
+
+panlist=> select * from lists limit 10;
+ list_id |       list_name       | active | status | public 
+---------+-----------------------+--------+--------+--------
+    4010 | directorslist         | t      | alive  | f
+    3935 | cat3rocks             | t      | alive  | f
+    4011 | nineball              | t      | alive  | f
+    4009 | outingsclub           | t      | alive  | t
+    3356 | munty07               | t      | alive  | f
+    3492 | ex-yu                 | t      | alive  | f
+    3506 | movie.night           | t      | alive  | f
+    3931 | emilys-freshmen       | t      | alive  | f
+    3437 | ericsfriendsandfamily | t      | alive  | f
+    3877 | irish                 | t      | alive  | t
+(10 rows)
+
+panlist=> select * from owners limit 10;
+ list_id |  owner   
+---------+----------
+       2 | woodford
+       2 | ak
+       2 | lsh9
+       3 | jml59
+       5 | rmorris
+       9 | mwm28
+      10 | kairiss
+      10 | lsh9
+      17 | hardman
+      20 | hardman
+(10 rows)
+
+panlist=> select * from subscribers limit 10;
+     list_name      |               email                
+--------------------+------------------------------------
+ studcomp-list      | student.computing@mailman.yale.edu
+ core-list          | peter.snow@yale.edu
+ core-list          | le.ong@yale.edu
+ fs150section5-list | nicholas.antosca@yale.edu
+ fs150section5-list | matteo.borghese@yale.edu
+ fs150section5-list | victoria.chiu@yale.edu
+ fs150section5-list | gil.doron@yale.edu
+ fs150section5-list | alexander.dryer@yale.edu
+ fs150section5-list | carlos.gonzales@yale.edu
+ fs150section5-list | fred.guerrier@yale.edu
+(10 rows)
+
+panlist=> 
