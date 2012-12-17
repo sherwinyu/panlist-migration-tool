@@ -3,16 +3,30 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+# development:
+  # adapter: postgresql
+  # database: zorger
+  # pool: 5
+  # username: 
+  # password:
 development:
   adapter: sqlite3
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
 
-ahi_fake:
+ahi_development:
+  adapter: sqlite3
+  database: db/ahi.sqlite3
+  pool: 5
+  timeout: 5000
+
+ahi_prduction:
   adapter: postgresql
   encoding: unicode
   database: panlist
+  username: postgres
+  password: postgres
 
 
 # Warning: The database defined as "test" will be erased and
