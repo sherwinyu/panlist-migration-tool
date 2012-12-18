@@ -50,7 +50,7 @@ describe Owner do
       o.panlists.should be_empty
     end
 
-    it "should save additional records when owner is modified" do
+    it "should save new ownerships when itself is saved" do
       o = Owner.find_by_netid 'sy23'
       o.panlists.should_not include(@p3)
       Ownership.where(list_id: @p3.id, owner: o.netid).should be_empty

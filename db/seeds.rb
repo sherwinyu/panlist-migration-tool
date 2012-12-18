@@ -26,4 +26,3 @@ p3.owners += [o2, o3, o4, o7, o8]
 p1.save
 p2.save
 p3.save
-
