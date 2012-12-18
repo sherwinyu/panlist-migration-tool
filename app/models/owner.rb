@@ -14,7 +14,7 @@ class Owner < ActiveRecord::Base
 
   before_save :write_panlists
   def write_panlists
-    @panlist.each { |p| Ownership.find_or_create_by_owner_and_list_id self.netid, p.list_id }
+    @panlists.each { |p| Ownership.find_or_create_by_owner_and_list_id self.netid, p.list_id } if @panlists
   end
 
 end

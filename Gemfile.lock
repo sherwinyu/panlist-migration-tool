@@ -144,6 +144,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   pg (~> 0.13.2)
+  pry
   pry-rails
   rails (= 3.2.8)
   rspec

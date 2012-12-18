@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Owner do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "should have the proper attributes" do
+    it { should respond_to :netid }
+    it { should respond_to :id }
+    it { should respond_to :panlists }
+  end
 end

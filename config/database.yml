@@ -21,6 +21,12 @@ ahi_development:
   pool: 5
   timeout: 5000
 
+ahi_test:
+  adapter: sqlite3
+  database: db/ahi_test.sqlite3
+  pool: 5
+  timeout: 5000
+
 ahi_prduction:
   adapter: postgresql
   encoding: unicode
