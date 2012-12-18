@@ -19,11 +19,11 @@ o6 = Owner.find_or_create_by_netid  'ft66'
 o7 = Owner.find_or_create_by_netid  'jmq23'
 o8 = Owner.find_or_create_by_netid  'ayl8'
 
-p1.owners + [o1, o3, o5, o7]
-p1.save
-p2.owners + [o1, o2, o5, o6]
-p2.save
-p3.owners + [o2, o3, o4, o7, o8]
-p3.save
+p1.owners += [o1, o3, o5, o7]
+p2.owners += [o1, o2, o5, o6]
+p3.owners += [o2, o3, o4, o7, o8]
 
+p1.save
+p2.save
+p3.save
 
