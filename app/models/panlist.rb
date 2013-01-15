@@ -10,7 +10,7 @@ class Panlist < ActiveRecord::Base
   alias_attribute :id, :list_id
 
   attr_accessor :owners
-  attr_accessor :subscribers
+  # attr_accessor :subscribers
 
   attr_accessible :migrated, :name, :public, :subscribers
   has_and_belongs_to_many :owners

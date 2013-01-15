@@ -21,10 +21,14 @@ class PanlistsController < ApplicationController
     end
   end
 
+  # The entry point for a list migration
+  # GET /panlists/1/migrate
   def migrate
-    @panlist = Panlist.find_by_id params[:id]
+    @panlist = Panlist.find_by_list_id params[:id]
     unless @panlist
-      flash.alert = "Couldn't find panlist with id \"#{params[:panlist_id]}\""
+      flash.alert = "Couldn't find panlist with id \"#{params[:id]}\""
+      binding.pry
+
       redirect_to '/dashboard/sy23' and return
     end
     @elilist = Elilist.new
