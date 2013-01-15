@@ -30,6 +30,7 @@ describe Panlist do
     Panlist.delete_all
     Owner.delete_all
   end
+
   describe "should have the proper attributes" do
     it { should respond_to :name }
     it { should respond_to :list_name }

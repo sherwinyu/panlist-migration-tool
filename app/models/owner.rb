@@ -1,7 +1,9 @@
 class Owner < ActiveRecord::Base
   attr_accessible :netid
 
-  # has_and_belongs_to_many :panlists
+  # has_and_belongs_to_many :panlists  
+  # Virtually HABTM Panlists through the 'Ownership' model, which resides on Ahi
+  
   def self.wrap netid
     Owner.find_or_initialize_by_netid netid
   end
@@ -14,6 +16,7 @@ class Owner < ActiveRecord::Base
 
   before_save :write_panlists
   def write_panlists
+    # for each panlist, find or create an 
     @panlists.each { |p| Ownership.find_or_create_by_owner_and_list_id self.netid, p.list_id } if @panlists
   end
 

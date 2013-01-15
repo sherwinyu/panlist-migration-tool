@@ -1,6 +1,6 @@
 class Panlist < ActiveRecord::Base
 
-  #Setup connection to legacy postgres database
+  # Setup connection to legacy postgres database
   # establish_connection "ahi_#{Rails.env}"
   
   establish_connection "ahi_#{Rails.env}"
@@ -18,12 +18,18 @@ class Panlist < ActiveRecord::Base
   # attr_accessible :owners
 
   def owners
-    @owners ||= Ownership.where(list_id: self.id).map { |ownership| Owner.find_by_netid(ownership.owner_id) }
+    # set @owners instance variable by
+    # 1) grabbing all Ownerships containing this panlist
+    # 2) converting each Ownership into an Owner
+    @owners ||= Ownership.where(list_id: self.id).map do |ownership|
+      Owner.find_by_netid(ownership.owner_id)
+    end
   end
 
   before_save :write_owners
 
   def write_owners
+    # Note: we can't use owner_id and panlist_id because aliases aren't supported in dynamic find_or_creates
     @owners.each { |o| Ownership.find_or_create_by_owner_and_list_id o.netid, self.id } if @owners
   end
 
