@@ -17,7 +17,7 @@ development:
 
 ahi_development:
   adapter: sqlite3
-  database: db/ahi.sqlite3
+  database: db/ahi_development.sqlite3
   pool: 5
   timeout: 5000
 
