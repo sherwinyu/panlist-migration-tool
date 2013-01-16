@@ -1,11 +1,11 @@
 <div class="well">
   <%= simple_form_for @elilist, html: {class: 'form-horizontal'} do |f| %>
-  
+
     <%= f.input :name %>
-    <%= f.input :owners_arr, collection: @elilist.owners.map{|o| o.netid} , as: :check_boxes, label: 'List owners to migrate' %>
+    <%= f.input :owners_arr, collection: @elilist.owners.map(&:netid), as: :check_boxes, label: 'List owners to migrate' %>
     <%= f.input :members, as: :text %>
     <%= f.input :list_type, collection: %w[Moderated Announcement Discussion] %>
-  
+
     <div class="actions">
       <%= f.submit %>
     </div>

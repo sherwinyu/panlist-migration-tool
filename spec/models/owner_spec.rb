@@ -1,35 +1,8 @@
 require 'spec_helper'
 
 describe Owner do
-  # TODO(syu): move into fixtures or factories
-  before(:all) do
-    @p1 = Panlist.create name: 'directorslist', public: false, subscribers: "a@b.c\nd@e.f\ng@r.f" 
-    @p2 = Panlist.create name: 'cat3rocks', public: false, subscribers: "coolcat@one.com\ncoolcat@two.com\ncoolcat@three.com" 
-    @p3 = Panlist.create name: 'emilys-freshmen', public: true, subscribers: "aaa@b.c\nd@e.f\ng@r.f"
-
-    @o1 = Owner.find_or_create_by_netid  'sy23'
-    @o2 = Owner.find_or_create_by_netid  'alb64'
-    @o3 = Owner.find_or_create_by_netid  'icc7'
-    @o4 = Owner.find_or_create_by_netid  'lt275'
-    @o5 = Owner.find_or_create_by_netid  'rx8'
-    @o6 = Owner.find_or_create_by_netid  'ft66'
-    @o7 = Owner.find_or_create_by_netid  'jmq23'
-    @o8 = Owner.find_or_create_by_netid  'ayl8'
-
-    @os1 = Ownership.create panlist_id: @p1.id, owner_id: @o1.netid
-    @os2 = Ownership.create panlist_id: @p1.id, owner_id: @o2.netid
-    @os3 = Ownership.create panlist_id: @p1.id, owner_id: @o3.netid
-     
-    @os4 = Ownership.create panlist_id: @p2.id, owner_id: @o1.netid
-    @os5 = Ownership.create panlist_id: @p2.id, owner_id: @o2.netid
-    @os6 = Ownership.create panlist_id: @p2.id, owner_id: @o7.netid
-    @os7 = Ownership.create panlist_id: @p2.id, owner_id: @o8.netid
-  end
-
-  after :all do
-    Ownership.delete_all
-    Panlist.delete_all
-    Owner.delete_all
+  before :all do
+    reset_records
   end
 
   describe "should have the proper attributes" do

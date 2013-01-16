@@ -1,19 +1,13 @@
 class PanlistsController < ApplicationController
-  # GET /panlists
-  # GET /panlists.json
-  def index
-    @panlists = Panlist.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @panlists }
-    end
-  end
 
   # GET /panlists/1
   # GET /panlists/1.json
   def show
-    @panlist = Panlist.find(params[:id])
+    @panlist = Panlist.find_by_list_id params[:id]
+    unless @panlist
+      flash.alert = "Couldn't find panlist with id \"#{params[:id]}\""
+      redirect_to '/dashboard' and return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,8 +21,6 @@ class PanlistsController < ApplicationController
     @panlist = Panlist.find_by_list_id params[:id]
     unless @panlist
       flash.alert = "Couldn't find panlist with id \"#{params[:id]}\""
-      binding.pry
-
       redirect_to '/dashboard/sy23' and return
     end
     @elilist = Elilist.new
@@ -40,7 +32,19 @@ class PanlistsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @elilist }
     end
+  end
 
+
+
+  # GET /panlists
+  # GET /panlists.json
+  def index
+    @panlists = Panlist.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @panlists }
+    end
   end
 
   # GET /panlists/new
