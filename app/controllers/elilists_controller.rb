@@ -1,4 +1,27 @@
 class ElilistsController < ApplicationController
+  # POST /elilists
+  def create
+    list_params = params[:elilist]
+
+    # transform owners array into newline separated flat string 
+    list_params[:owners] = list_params.delete(:owners_arr).reject!{ |e| e.empty? } * "\n" if list_params[:owners_arr]
+
+    # members already is a flat string
+    list_params[:subscribers] = list_params.delete(:members) if list_params[:members]
+
+    @elilist = Elilist.new list_params
+
+    respond_to do |format|
+      if @elilist.save
+        format.html { redirect_to @elilist, notice: 'Elilist was successfully created.' }
+        format.json { render json: @elilist, status: :created, location: @elilist }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @elilist.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /elilists
   # GET /elilists.json
   def index
@@ -21,6 +44,8 @@ class ElilistsController < ApplicationController
     end
   end
 
+
+=begin
   # GET /elilists/new
   # GET /panlists/id/migrate
   def new
@@ -43,27 +68,6 @@ class ElilistsController < ApplicationController
   # GET /elilists/1/edit
   def edit
     @elilist = Elilist.find(params[:id])
-  end
-
-  # POST /elilists
-  # POST /elilists.json
-  def create
-    list_params = params[:elilist]
-    list_params[:owners] = list_params.delete(:owners_arr).reject!{ |e| e.empty? } * "\n"
-    list_params[:subscribers] = list_params.delete(:members)
-
-    @elilist = Elilist.new list_params
-    binding.pry
-
-    respond_to do |format|
-      if @elilist.save
-        format.html { redirect_to @elilist, notice: 'Elilist was successfully created.' }
-        format.json { render json: @elilist, status: :created, location: @elilist }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @elilist.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /elilists/1
@@ -93,4 +97,5 @@ class ElilistsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end

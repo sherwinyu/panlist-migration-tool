@@ -1,7 +1,5 @@
 class PanlistsController < ApplicationController
 
-  # GET /panlists/1
-  # GET /panlists/1.json
   def show
     @panlist = Panlist.find_by_list_id params[:id]
     unless @panlist
@@ -34,8 +32,6 @@ class PanlistsController < ApplicationController
     end
   end
 
-
-
   # GET /panlists
   # GET /panlists.json
   def index
@@ -49,6 +45,7 @@ class PanlistsController < ApplicationController
 
   # GET /panlists/new
   # GET /panlists/new.json
+=begin
   def new
     @panlist = Panlist.new
 
@@ -106,4 +103,5 @@ class PanlistsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end

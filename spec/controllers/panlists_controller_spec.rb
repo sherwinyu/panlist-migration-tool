@@ -38,11 +38,26 @@ describe PanlistsController do
   end
 
   describe "GET migrate" do
-    it "should fail gracefully when list doesn't exist"
-    it "should only let you migrate a list you own"
-    describe "elilist variable" do
-      it "should be set with proper owners and name"
-      it "should set @elilist.members"
+    describe "on a nonexistent panlist" do
+      it "should redirect to the panlist" do
+        get :show, { id: 'nonexistentid' }, valid_session
+        response.should redirect_to '/dashboard'
+      end
+    end
+    describe "on valid panlist" do
+      before :each do
+        @panlist = Panlist.find_by_list_name 'directorslist'
+        get :migrate, { id: @panlist.id }, valid_session
+      end
+
+      it "should only let you migrate a list you own"
+
+      it "should be set with proper owners and name from the corresponding panlist" do
+        assigns(:elilist).should be_a_new Elilist
+        assigns(:elilist).name.should eq @panlist.name
+        assigns(:elilist).owners.should eq @panlist.owners
+        assigns(:elilist).members.should eq "a@b.c\nd@e.f\ng@r.f"
+      end
     end
   end
 

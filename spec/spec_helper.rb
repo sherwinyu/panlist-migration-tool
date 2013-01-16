@@ -48,6 +48,7 @@ def create_records
   @p2 = Panlist.create name: 'cat3rocks', public: false, subscribers: "coolcat@one.com\ncoolcat@two.com\ncoolcat@three.com" 
   @p3 = Panlist.create name: 'emilys-freshmen', public: true, subscribers: "aaa@b.c\nd@e.f\ng@r.f"
 
+
   @o1 = Owner.find_or_create_by_netid  'sy23'
   @o2 = Owner.find_or_create_by_netid  'alb64'
   @o3 = Owner.find_or_create_by_netid  'icc7'
@@ -65,6 +66,8 @@ def create_records
   @os5 = Ownership.create panlist_id: @p2.id, owner_id: @o2.netid
   @os6 = Ownership.create panlist_id: @p2.id, owner_id: @o7.netid
   @os7 = Ownership.create panlist_id: @p2.id, owner_id: @o8.netid
+
+  @e1 = Elilist.create name: 'directorslist', subscribers: "a@b.c\nd@e.f\ng@r.f", owners: [@o1, @o2, @o3].map(&:netid) * "\n"
 end
 
 def reset_records
