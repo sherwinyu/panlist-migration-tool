@@ -7,7 +7,7 @@ class ElilistsController < ApplicationController
     list_params[:owners] = list_params.delete(:owners_arr).reject!{ |e| e.empty? } * "\n" if list_params[:owners_arr]
 
     # members already is a flat string
-    list_params[:subscribers] = list_params.delete(:members) if list_params[:members]
+    list_params[:subscribers] = list_params.delete(:members).split.join "\n" if list_params[:members]
 
     @elilist = Elilist.new list_params
 

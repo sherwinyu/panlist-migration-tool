@@ -6,7 +6,7 @@ describe ElilistsController do
   # Elilist. As you add validations to Elilist, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {"name"=>"directorslistddd",
+    {"name"=>"directorslist",
      "owners_arr"=>["icc7", "rx8", ""],
      "members"=>"a@b.c\r\nd@e.f\r\ng@r.f",
      "list_type"=>"Announcement"}
@@ -34,7 +34,10 @@ describe ElilistsController do
       it "assigns a newly created elilist as @elilist" do
         post :create, {:elilist => valid_attributes}, valid_session
         assigns(:elilist).should be_a(Elilist)
-        assigns(:elilist).should be_persisted
+        assigns(:elilist).name.should eq valid_attributes["name"]
+        assigns(:elilist).owners.should eq "icc7\nrx8"
+        assigns(:elilist).subscribers.should eq "a@b.c\nd@e.f\ng@r.f"
+        assigns(:elilist).list_type.should eq "Announcement"
       end
 
       it "redirects to the created elilist" do
