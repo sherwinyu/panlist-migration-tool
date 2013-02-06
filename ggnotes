@@ -1,0 +1,66 @@
+From: /home/syu/projects/plmt/lib/gappsprovisioning/provisioningapi.rb @ line 752 GAppsProvisioning::GroupEntry#initialize:
+
+752:                def initialize(entry) #:nodoc:
+=> 753:                   binding.pry
+754:                entry.elements.each("apps:property"){ |e| @group_id = e.attributes["value"] if e.attributes["name"].eql?("groupId") }
+755:                end
+
+1.9.3 (#<GAppsProvisioning::GroupEntry:0x00000003ec17a8>):0 > entry
+=> nil
+1.9.3 (#<GAppsProvisioning::GroupEntry:0x00000003ec17a8>):0 > 
+bye-bye
+NoMethodError: undefined method `elements' for nil:NilClass
+from /home/syu/projects/plmt/lib/gappsprovisioning/provisioningapi.rb:754:in `initialize'
+1.9.3 (main):0 > 
+
+
+This happens because the entry is nil because the returned xml document is actually an error .
+
+
+
+
+
+Error: 
+
+From: /home/syu/projects/plmt/lib/gappsprovisioning/provisioningapi.rb @ line 650 GAppsProvisioning::ProvisioningApi#request:
+
+    650:                def request(action, value=nil, header=nil, message=nil)
+    651: 
+    652:                        #param value : value to be concatenated to action path ex: GET host/path/value
+    653:                        method = @action[action][:method]
+    654:                        value = '' if !value
+    655:                        path = @action[action][:path]+value
+    656:                         binding.pry
+    657:                        response = @connection.perform(method, path, message, header)
+ => 658:                         binding.pry
+    659:                        response_xml = Document.new(response.body)
+    660:                        test_errors(response_xml)
+    661:                        return response_xml
+    662:                end
+
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > response
+=> #<Net::HTTPBadRequest 400 Bad Request readbody=true>
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > response.body
+=> "[Line 1, Column 442, element apps:property] apps:property/@value is required."
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > response
+=> #<Net::HTTPBadRequest 400 Bad Request readbody=true>
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > response.to_s
+=> "#<Net::HTTPBadRequest:0x00000004233da0>"
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > response.read_body
+=> "[Line 1, Column 442, element apps:property] apps:property/@value is required."
+1.9.3 (#<GAppsProvisioning::ProvisioningApi:0x00000003fe8208>):0 > 
+
+And what is at column 442?
+<?xml version='1.0' encoding='UTF-8'?><atom:entry xmlns:apps='http://schemas.google.com/apps/2006' xmlns:atom='http://www.w3.org/2005/Atom' xmlns:gd='http://schemas.google.com/g/2005'><atom:category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/apps/2006#emailList'/><apps:property name='groupId' value='sherwinsgroup'/><apps:property name='groupName' value='sherwinsgrp'/><apps:property name='description'/><apps:property name='emailPermission'/></atom:entry>
+422:
+<apps:property name='emailPermission'/></atom:entry>
+
+
+
+More about emailPermission: https://groups.google.com/forum/#!msg/google-apps-mgmt-apis/93UEo-e8DdQ/dRDpXQxObGcJ
+    A newly created group does not have any subscribers. emailPermission is one of the following:
+    Owner - Owners of the group
+    Member - Members of the group
+    Domain - Any user who belongs to the same domain as the group
+    Anyone - Any user
+

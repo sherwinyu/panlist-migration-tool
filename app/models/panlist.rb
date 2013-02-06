@@ -1,3 +1,5 @@
+require 'gappsprovisioning/provisioningapi.rb'
+
 class Panlist < ActiveRecord::Base
 
   # Setup connection to legacy postgres database
@@ -40,5 +42,4 @@ class Panlist < ActiveRecord::Base
   def members
     subscribers.split
   end
-
 end
