@@ -7,14 +7,11 @@ class Elilist < ActiveRecord::Base
   attr_accessor :owners_arr
 
   def create_google_group
-    adminuser = "admin@yale.edu" # TODO(syu): Figure out what to put here
-    password  = "password"
+    # convert to dev / prod domain
+    adminuser = "sherwin@gsbx.yale.edu" # TODO(syu): Figure out what to put here
+    password  = "plmt_temp!!"
 
     google = ProvisioningApi.new(adminuser, password)
-    user = google.retrieve_user 'jsmith'
-    # groups = google.retrieve_groups 'sherwin'
-    # group_id =  "testgroupname"
-    # group_name =  "test group name"
     group_id = name # may need to dasherize
     group_name = name
 
@@ -29,12 +26,12 @@ class Elilist < ActiveRecord::Base
 
     group = google.create_group group_id, [group_name, 'just a description', group_type]
 
-    subscribers.each |subscriber| do
-      subscriber.slice![ /[^@]*/ ] # extract portion of email address before '@', necessary for add_member_to_group api
+    subscribers.each do |subscriber| 
+      # subscriber.slice![ /[^@]*/ ] # extract portion of email address before '@', necessary for add_member_to_group api
       google.add_member_to_group subscriber, group_id
     end
-    owners.each |owner| do
-      owner.slice![ /[^@]*/ ] # extract portion of email address before '@', necessary for add_member_to_group api
+    owners.each do |owner| 
+      # owner.slice![ /[^@]*/ ] # extract portion of email address before '@', necessary for add_member_to_group api
       google.add_member_to_group owner, group_id # make sure is a member before is an owner
       google.add_owner_to_group owner, group_id
     end
