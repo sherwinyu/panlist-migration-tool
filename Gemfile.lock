@@ -110,6 +110,8 @@ GEM
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
+    rspec-spies (2.1.3)
+      rspec (~> 2.0)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -149,6 +151,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rspec
   rspec-rails
+  rspec-spies (= 2.1.3)
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3

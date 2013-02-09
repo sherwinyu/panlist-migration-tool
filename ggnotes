@@ -64,3 +64,20 @@ More about emailPermission: https://groups.google.com/forum/#!msg/google-apps-mg
     Domain - Any user who belongs to the same domain as the group
     Anyone - Any user
 
+
+
+
+#### 
+additional features
+
+Check availability of new group name, clarify 'name' field
+
+check owners by default, show name / emial address instead of netid. (special db needed) (LowPRI)
+
+
+clarify instructions for migrating
+
+
+
+
+

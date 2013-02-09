@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'pry'
+  gem 'rspec-spies', '2.1.3'
 end
 
 
