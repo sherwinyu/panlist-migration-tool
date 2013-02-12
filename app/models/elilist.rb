@@ -17,20 +17,19 @@ class Elilist < ActiveRecord::Base
 
   def create_google_group
     # convert to dev / prod domain
-    adminuser = "sherwin.yu@gsbx.yale.edu"
-    password  = "plmt_temp!!"
+    adminuser =  "sherwin.yu@gsbx.yale.edu"
+    adminuser =  "sherwin@communificiency.com"
+    password  = ENV['GG_PW']
+
     binding.pry
-
     google = ProvisioningApi.new(adminuser, password)
-    self.list_id ||= self.name # may need to dasherize
-
+=begin
 
     # TODO(syu): double check how group types work
     group_type = google_group_type
     binding.pry
     group = google.create_group list_id, [name, 'just a description', group_type]
 
-=begin
     subscribers.each do |subscriber| 
       google.add_member_to_group subscriber, group_id
     end

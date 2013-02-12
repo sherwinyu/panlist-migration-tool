@@ -9,5 +9,21 @@ database.yml contains two additional entries, ahi_test and ahi_development, for 
 Getting migrations to work with multiple databse connections is tricky, so instead we check in db/ahi_test.sqlite3 and db/ahi_development.sqlite3 to version control.
 
 To setup, run rake db:migrate (sets up the default development.sqlite3 database) and rake:db:seed (which will populate the both development.sqlite3 and ahi_development.sqlite).
+For tests, run rake db:test:load to set up test.sqlite3. 
 
-For tests, run rake db:test:load to set up test.sqlite3. Because ahi_test.sqlite3 is checked into the repository, the **schema** should already be in place. For now, all tests still programmatically recreate the test database **records** to be safe.
+
+== Setting up data for tests
+
+Run rake db:migrate
+rake db:migrate RAILS_ENV=test
+
+You might have to rerun one specific migration, the one that sets up the ahi tables. 
+
+    rake db:migrate:down RAILS_ENV=test VERSION=20130115061627
+    rake db:migrate:up RAILS_ENV=test VERSION=20130115061627
+
+If it complains on the down migration, comment out the 'drop' statements temporarily. This seems to be a bug/issue with the way migrations work with multiple database connections and environments
+
+
+
+

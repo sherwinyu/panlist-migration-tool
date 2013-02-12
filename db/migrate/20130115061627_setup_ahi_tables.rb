@@ -4,7 +4,6 @@ class SetupAhiTables < ActiveRecord::Migration
   end
 
   def up
-    puts 'up!'
     create_table :lists, primary_key: :list_id do |t|
       t.integer :list_id
       t.string :list_name
@@ -31,10 +30,8 @@ class SetupAhiTables < ActiveRecord::Migration
   end
 
   def down
-    puts 'down!'
     drop_table :lists
     drop_table :owners
-    puts 'down!'
 
     # necessary because: http://stackoverflow.com/a/11020572/1164573
     @connection = ActiveRecord::Base.establish_connection("#{Rails.env}").connection
