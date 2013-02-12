@@ -19,7 +19,7 @@ class Elilist < ActiveRecord::Base
     # convert to dev / prod domain
     adminuser =  "sherwin.yu@gsbx.yale.edu"
     adminuser =  "sherwin@communificiency.com"
-    password  = ENV['GG_PW']
+    password  = Plmt::Application.config.google_data_pw
 
     binding.pry
     google = ProvisioningApi.new(adminuser, password)

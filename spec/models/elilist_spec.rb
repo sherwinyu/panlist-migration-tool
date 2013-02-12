@@ -27,6 +27,7 @@ describe Elilist do
       ).and_return true
 =end
 
+      binding.pry
       @e1.create_google_group
     end
 
