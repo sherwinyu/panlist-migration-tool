@@ -21,14 +21,16 @@ class Elilist < ActiveRecord::Base
     adminuser =  "sherwin@communificiency.com"
     password  = Plmt::Application.config.google_data_pw
 
-    binding.pry
     google = ProvisioningApi.new(adminuser, password)
-=begin
 
     # TODO(syu): double check how group types work
+    list_id ||= name
+
     group_type = google_group_type
-    binding.pry
     group = google.create_group list_id, [name, 'just a description', group_type]
+    # ppl = google.retrieve_all_users
+    # binding.pry
+=begin
 
     subscribers.each do |subscriber| 
       google.add_member_to_group subscriber, group_id

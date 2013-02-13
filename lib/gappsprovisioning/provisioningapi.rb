@@ -651,7 +651,6 @@ module GAppsProvisioning #:nodoc:
 			value = '' if !value
 			path = @action[action][:path]+value
 			response = @connection.perform(method, path, message, header)
-                        binding.pry
 			response_xml = Document.new(response.body)
 			test_errors(response_xml)
 			return response_xml
