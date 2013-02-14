@@ -21,15 +21,37 @@ describe Elilist do
     @e1.list_type = "Discussion"
     @e1.google_group_type.should == 'Anyone'
   end
+  describe 'google group id' do
+    it "should use the list name when list id is not present" do
+      @e1 = Elilist.find_by_name 'directorslist'
+      @e1.list_id.should be_nil
+      @e1.google_group_id.should == 'directorslist'
+    end
+
+    it "should use convert spaces to dashes in the list_id" do
+      @e1 = Elilist.find_by_name 'directorslist'
+      @e1.list_id = "my list name"
+      @e1.google_group_id.should == 'my-list-name'
+    end
+
+    it "should use convert spaces to dashes in the list name if list id is not present" do
+      @e1 = Elilist.find_by_name 'directorslist'
+      @e1.list_id.should be_nil
+      @e1.name = "my list name"
+      @e1.google_group_id.should == 'my-list-name'
+    end
+
+  end
 
   describe "create google group" do 
+    include GAppsProvisioning
     it "should make the proper call to a ProvisioningApi instance" do
-      include GAppsProvisioning
       @e1 = Elilist.find_by_name 'directorslist'
 
-      # GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:retrieve_all_users).and_return true
-      # GAppsProvisioning::Connection.any_instance.should_receive(:retrieve_all_users).and_return true
       GAppsProvisioning::ProvisioningApi.should_receive(:new).and_call_original
+      GAppsProvisioning::ProvisioningApi.any_instance.stub(:add_member_to_group).and_return true
+      GAppsProvisioning::ProvisioningApi.any_instance.stub(:add_owner_to_group).and_return true
+
       GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:create_group).with(
         'directorslist',
         ['directorslist', 'just a description', 'Owner']
@@ -37,10 +59,27 @@ describe Elilist do
 
       @e1.create_google_group
     end
-    it "should make the appropriate calls to add subscribers" do
-    end
+
     it "should make the appropriate calls to add members" do
+      @e1 = Elilist.find_by_name 'directorslist'
+
+      GAppsProvisioning::ProvisioningApi.should_receive(:new).and_call_original
+      GAppsProvisioning::ProvisioningApi.any_instance.stub(:create_group)
+      GAppsProvisioning::ProvisioningApi.any_instance.stub(:add_owner_to_group)
+
+      GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:add_member_to_group).with(
+        'a@b.c', "directorslist").and_return true
+      GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:add_member_to_group).with(
+        'd@e.f', "directorslist").and_return true
+      GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:add_member_to_group).with(
+        'g@r.f', "directorslist").and_return true
+
+      @e1.create_google_group
     end
+
+    it "should make the appropriate calls to add owners" do
+    end
+
     it 
   end
   describe "create google group integration test" do

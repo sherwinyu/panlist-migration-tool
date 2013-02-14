@@ -14,6 +14,11 @@ class Elilist < ActiveRecord::Base
       else 'Owner'
       end
   end
+  def google_group_id
+    val = list_id || name
+    # dasherize the id
+    val.gsub /\s+/, "-"
+  end
 
   def create_google_group
     # convert to dev / prod domain
@@ -26,16 +31,14 @@ class Elilist < ActiveRecord::Base
     # TODO(syu): double check how group types work
     list_id ||= name
 
-    group_type = google_group_type
+    group_type = self.google_group_type
+    group_id = self.google_group_id
     group = google.create_group list_id, [name, 'just a description', group_type]
-    # ppl = google.retrieve_all_users
-    # binding.pry
-=begin
-
-    subscribers.each do |subscriber| 
+    subscribers_arr.each do |subscriber| 
       google.add_member_to_group subscriber, group_id
     end
-    owners.each do |owner| 
+=begin
+    owners_arr.each do |owner| 
       google.add_member_to_group owner, group_id # make sure is a member before is an owner
       google.add_owner_to_group owner, group_id
     end
