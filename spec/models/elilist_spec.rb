@@ -9,8 +9,10 @@ describe Elilist do
     it { should respond_to :name }
     it { should respond_to :list_id }
     it { should respond_to :list_type }
+    it { should respond_to :owners_raw }
     it { should respond_to :owners }
-    it { should respond_to :owners_arr }
+    it { should respond_to :subscribers_raw }
+    it { should respond_to :subscribers }
   end
 
   describe 'google group type' do

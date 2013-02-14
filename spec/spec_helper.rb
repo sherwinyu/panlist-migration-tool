@@ -41,6 +41,7 @@ def delete_all_records
   Ownership.delete_all
   Panlist.delete_all
   Owner.delete_all
+  Elilist.delete_all
 end
 
 def create_records

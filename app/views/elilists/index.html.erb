@@ -14,8 +14,8 @@
 <% @elilists.each do |elilist| %>
   <tr>
     <td><%= elilist.name %></td>
-    <td><%= elilist.subscribers %></td>
-    <td><%= elilist.owners %></td>
+    <td><%= elilist.subscribers_raw %></td>
+    <td><%= elilist.owners_raw %></td>
     <td><%= elilist.list_type %></td>
     <td><%= link_to 'Show', elilist %></td>
     <td><%= link_to 'Edit', edit_elilist_path(elilist) %></td>
