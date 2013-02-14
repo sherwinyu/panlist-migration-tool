@@ -14,29 +14,18 @@ class Elilist < ActiveRecord::Base
       end
   end
   def google_group_id
-    val = list_id || name
+    val = self.list_id || self.name
     # dasherize the id
     val.gsub /\s+/, "-"
   end
 
   def create_google_group
-    # convert to dev / prod domain
-    adminuser =  "sherwin.yu@gsbx.yale.edu"
-    adminuser =  "sherwin@communificiency.com"
-    password  = Plmt::Application.config.google_data_pw
-
-    google = ProvisioningApi.new(adminuser, password)
-
-    # TODO(syu): double check how group types work
-    list_id ||= name
-
-    group_type = self.google_group_type
-    group_id = self.google_group_id
-    group = google.create_group list_id, [name, 'just a description', group_type]
+    self.google_group_create
     subscribers.each do |subscriber| 
-      google.add_member_to_group subscriber, group_id
+      self.google_group_add_member subscriber
     end
 =begin
+    group = google.create_group self.google_group_id, [name, 'just a description', group_type]
     owners_arr.each do |owner| 
       google.add_member_to_group owner, group_id # make sure is a member before is an owner
       google.add_owner_to_group owner, group_id
@@ -57,6 +46,26 @@ class Elilist < ActiveRecord::Base
 
   def subscribers= s
     self.subscribers_raw = s.join "\n"
+  end
+
+  def delete_google_group
+    google_api.delete_group self.google_group_id
+  end
+
+  def google_group_add_member email
+    google_api.add_member_to_group email, self.google_group_id
+  end
+
+  def google_group_create
+     binding.pry
+     google_api.create_group self.google_group_id, [name, 'just a description', self.google_group_type]
+  end
+
+  def google_api
+    adminuser =  "sherwin.yu@gsbx.yale.edu"
+    adminuser =  "sherwin@communificiency.com"
+    password  = Plmt::Application.config.google_data_pw
+    @google_api ||= ProvisioningApi.new(adminuser, password)
   end
 
 end
