@@ -36,10 +36,11 @@ class Panlist < ActiveRecord::Base
   end
 
   def num_members 
-    subscribers.size
+    self.members.size
   end
 
   def members
+    # TODO(syu): to be overriden with whatever function pulls in the flat list of subscriber addresses
     subscribers.split
   end
 end

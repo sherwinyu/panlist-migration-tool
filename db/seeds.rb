@@ -27,7 +27,7 @@ p1.owners += [o1, o3, o5, o7]
 p2.owners += [o1, o2, o5, o6]
 p3.owners += [o2, o3, o4, o7, o8]
 
-e1 = Elilist.find_or_create_by_name name: 'directorslist', list_id: 'directorslist', subscribers: "a@b.c\nd@e.f\ng@r.f", owners: [o1, o2, o3].map(&:netid) * "\n", list_type: 'Announcement'
+e1 = Elilist.find_or_create_by_name name: 'directorslist', list_id: 'directorslist', subscribers_raw: "a@b.c\nd@e.f\ng@r.f", owners_raw: [o1, o2, o3].map(&:netid) * "\n", list_type: 'Announcement'
 
 p1.save
 p2.save

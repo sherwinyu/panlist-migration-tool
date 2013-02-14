@@ -67,7 +67,7 @@ def create_records
   @os6 = Ownership.create panlist_id: @p2.id, owner_id: @o7.netid
   @os7 = Ownership.create panlist_id: @p2.id, owner_id: @o8.netid
 
-  @e1 = Elilist.create name: 'directorslist', subscribers: "a@b.c\nd@e.f\ng@r.f", owners: [@o1, @o2, @o3].map(&:netid) * "\n", list_type: 'Announcement'
+  @e1 = Elilist.create name: 'directorslist', subscribers_raw: "a@b.c\nd@e.f\ng@r.f", owners_raw: [@o1, @o2, @o3].map(&:netid) * "\n", list_type: 'Announcement'
 end
 
 def reset_records

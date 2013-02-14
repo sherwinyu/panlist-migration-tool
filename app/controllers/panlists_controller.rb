@@ -13,7 +13,7 @@ class PanlistsController < ApplicationController
     end
   end
 
-  # The entry point for a list migration
+  # The entry point for a panlist -> elilist migration
   # GET /panlists/1/migrate
   def migrate
     @panlist = Panlist.find_by_list_id params[:id]
@@ -22,8 +22,8 @@ class PanlistsController < ApplicationController
       redirect_to '/dashboard/sy23' and return
     end
     @elilist = Elilist.new
-    @elilist.owners = @panlist.owners
-    @elilist.members = @panlist.members.join "\n"
+    @elilist.owners = @panlist.owners.map &:netid
+    @elilist.subscribers = @panlist.members
     @elilist.name = @panlist.name
 
     respond_to do |format|

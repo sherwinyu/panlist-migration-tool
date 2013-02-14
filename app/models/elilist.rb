@@ -2,9 +2,8 @@ require 'gappsprovisioning/provisioningapi.rb'
 
 class Elilist < ActiveRecord::Base
   include GAppsProvisioning
-  attr_accessible :list_type, :name, :list_id, :owners, :subscribers
-  attr_accessor :members
-  attr_accessor :owners_arr
+  attr_accessible :list_type, :name, :list_id, :owners_raw, :subscribers_raw
+  # attr_accessor :owners, :subscribers
 
   def google_group_type
     return case list_type
@@ -34,7 +33,7 @@ class Elilist < ActiveRecord::Base
     group_type = self.google_group_type
     group_id = self.google_group_id
     group = google.create_group list_id, [name, 'just a description', group_type]
-    subscribers_arr.each do |subscriber| 
+    subscribers.each do |subscriber| 
       google.add_member_to_group subscriber, group_id
     end
 =begin
@@ -45,12 +44,19 @@ class Elilist < ActiveRecord::Base
 =end
   end
 
-  def owners_arr
-    owners.split
+  def owners
+    self.owners_raw.split
+  end
+  def owners= o
+    self.owners_raw = o.join "\n"
   end
 
-  def subscribers_arr
-    subscribers.split
+  def subscribers
+    self.subscribers_raw.split
+  end
+
+  def subscribers= s
+    self.subscribers_raw = s.join "\n"
   end
 
 end

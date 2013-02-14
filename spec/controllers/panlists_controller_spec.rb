@@ -55,8 +55,8 @@ describe PanlistsController do
       it "should be set with proper owners and name from the corresponding panlist" do
         assigns(:elilist).should be_a_new Elilist
         assigns(:elilist).name.should eq @panlist.name
-        assigns(:elilist).owners.should eq @panlist.owners
-        assigns(:elilist).members.should eq "a@b.c\nd@e.f\ng@r.f"
+        assigns(:elilist).owners_raw.should eq @panlist.owners.map(&:netid) * "\n"
+        assigns(:elilist).subscribers_raw.should eq "a@b.c\nd@e.f\ng@r.f"
       end
     end
   end

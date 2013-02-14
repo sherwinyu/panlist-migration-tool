@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209200417) do
+ActiveRecord::Schema.define(:version => 20130214053929) do
 
   create_table "elilists", :force => true do |t|
     t.string   "name"
-    t.string   "subscribers"
-    t.string   "owners"
     t.string   "list_type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "list_id"
+    t.string   "subscribers_raw"
+    t.string   "owners_raw"
   end
 
   create_table "owners", :force => true do |t|

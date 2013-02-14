@@ -35,8 +35,8 @@ describe ElilistsController do
         post :create, {:elilist => valid_attributes}, valid_session
         assigns(:elilist).should be_a(Elilist)
         assigns(:elilist).name.should eq valid_attributes["name"]
-        assigns(:elilist).owners.should eq "icc7\nrx8"
-        assigns(:elilist).subscribers.should eq "a@b.c\nd@e.f\ng@r.f"
+        assigns(:elilist).owners_raw.should eq "icc7\nrx8"
+        assigns(:elilist).subscribers_raw.should eq "a@b.c\nd@e.f\ng@r.f"
         assigns(:elilist).list_type.should eq "Announcement"
       end
 
