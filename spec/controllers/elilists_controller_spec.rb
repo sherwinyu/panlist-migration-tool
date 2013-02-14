@@ -7,8 +7,8 @@ describe ElilistsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {"name"=>"directorslist",
-     "owners_arr"=>["icc7", "rx8", ""],
-     "members"=>"a@b.c\r\nd@e.f\r\ng@r.f",
+     "owners_raw"=>["icc7", "rx8", ""],
+     "subscribers_raw"=>"a@b.c\r\nd@e.f\r\ng@r.f",
      "list_type"=>"Announcement"}
   end
 

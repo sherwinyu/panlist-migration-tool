@@ -56,7 +56,6 @@ class Elilist < ActiveRecord::Base
   end
 
   def subscribers= s
-    binding.pry
     self.subscribers_raw = s.join "\n"
   end
 
