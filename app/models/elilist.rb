@@ -49,19 +49,18 @@ class Elilist < ActiveRecord::Base
   end
 
   def delete_google_group
-    google_api.delete_group self.google_group_id
+    Elilist.google_api.delete_group self.google_group_id
   end
 
   def google_group_add_member email
-    google_api.add_member_to_group email, self.google_group_id
+    Elilist.google_api.add_member_to_group email, self.google_group_id
   end
 
   def google_group_create
-     binding.pry
-     google_api.create_group self.google_group_id, [name, 'just a description', self.google_group_type]
+     Elilist.google_api.create_group self.google_group_id, [name, 'just a description', self.google_group_type]
   end
 
-  def google_api
+  def self.google_api
     adminuser =  "sherwin.yu@gsbx.yale.edu"
     adminuser =  "sherwin@communificiency.com"
     password  = Plmt::Application.config.google_data_pw

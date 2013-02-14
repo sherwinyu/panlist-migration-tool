@@ -48,7 +48,6 @@ describe Elilist do
   describe "google api wrappers" do
     include GAppsProvisioning
     describe "google_api" do
-
     end
 
     describe "google_group_create" do
@@ -72,6 +71,7 @@ describe Elilist do
     end
 
   end
+
   describe "create google group" do 
     include GAppsProvisioning
     it "it should use the wrapper methods" do
@@ -81,10 +81,6 @@ describe Elilist do
       @e1.should_receive(:google_group_add_member).with("d@e.f").and_return true
       @e1.should_receive(:google_group_add_member).with("g@r.f").and_return true
 
-      # GAppsProvisioning::ProvisioningApi.should_receive(:new).and_call_original
-      # GAppsProvisioning::ProvisioningApi.any_instance.stub(:add_member_to_group).and_return true
-      # GAppsProvisioning::ProvisioningApi.any_instance.stub(:add_owner_to_group).and_return true
-
       @e1.create_google_group
     end
   end
@@ -92,10 +88,16 @@ describe Elilist do
   describe "create google group integration test" do
     include GAppsProvisioning
 
-    xit "should hit create the group + members and owners on the server and be verifiable" do
+    it "should hit create the group + members and owners on the server and be verifiable" do
       @e1 = Elilist.find_by_name 'directorslist'
       @e1.list_id = 'newlist'
+      @e1.subscribers_raw = "adam.bray@yale.edu\nsherwin.yu@yale.edu\nsherwinxyu@gmail.com"
       @e1.create_google_group
+      groups = Elilist.google_api.retrieve_all_groups()
+      groups.map(&:group_id).map { |s| s[/[^@]+/]}. should include @e1.google_group_id
+      members = Elilist.google_api.retrieve_all_members @e1.google_group_id
+      members.map(&:member_id).should include *@e1.subscribers
+
     end
     after { @e1.delete_google_group; binding.pry }
   end
