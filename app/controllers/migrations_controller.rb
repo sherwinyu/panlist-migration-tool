@@ -1,12 +1,12 @@
 class MigrationsController < ApplicationController
 
-  def login
-  end
-
   def dashboard
-    @owner = Owner.find_by_netid params[:netid]
+    @zz = current_user
+    binding.pry
+
+    @owner = Owner.find_by_netid current_user
     unless @owner
-      flash.alert = "Invalid netid '#{params[:netid]}'"
+      flash.alert = "Something went wrong"
       redirect_to :root and return
     end
     @lists = @owner.panlists

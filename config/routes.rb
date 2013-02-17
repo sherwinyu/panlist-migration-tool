@@ -10,7 +10,7 @@ Plmt::Application.routes.draw do
   end
 
 
-  root to: 'migrations#login'
+  root to: 'migrations#dashboard'
   match '/dashboard', to: 'migrations#dashboard'
   match '/dashboard/:netid', to: 'migrations#dashboard' 
   # match '/panlists/:panlist_id/migrate', to: 'elilists#new'

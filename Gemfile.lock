@@ -112,6 +112,11 @@ GEM
       rspec-mocks (~> 2.12.0)
     rspec-spies (2.1.3)
       rspec (~> 2.0)
+    rubycas-client (2.2.1)
+      activesupport
+    rubycas-client-rails (0.1.0)
+      rails (>= 3.0.0)
+      rubycas-client (>= 2.2.0)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -152,6 +157,8 @@ DEPENDENCIES
   rspec
   rspec-rails
   rspec-spies (= 2.1.3)
+  rubycas-client (= 2.2.1)
+  rubycas-client-rails
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3
