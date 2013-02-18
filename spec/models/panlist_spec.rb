@@ -59,8 +59,6 @@ describe Panlist do
       Ownership.where(list_id: p.id, owner: @o4.netid).should have_exactly(1).record
       Ownership.where(list_id: p.id, owner: @o5.netid).should be_empty
       Ownership.where(list_id: p.id, owner: @o6.netid).should be_empty
-
-
     end
   end
 end

@@ -1,14 +1,13 @@
 class MigrationsController < ApplicationController
 
   def dashboard
-    @zz = current_user
-    binding.pry
+    net_id = if admins.include? current_user and params[:fake_net_id] 
+               params[:fake_net_id]
+             else
+               current_user
+             end
+    @owner = Owner.find_or_initialize_by_netid net_id
 
-    @owner = Owner.find_by_netid current_user
-    unless @owner
-      flash.alert = "Something went wrong"
-      redirect_to :root and return
-    end
     @lists = @owner.panlists
   end
 end

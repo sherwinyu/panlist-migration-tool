@@ -25,6 +25,7 @@ class PanlistsController < ApplicationController
     @elilist.owners = @panlist.owners.map &:netid
     @elilist.subscribers = @panlist.members
     @elilist.name = @panlist.name
+    @elilist.list_id = @elilist.google_group_id
 
     respond_to do |format|
       format.html # new.html.erb

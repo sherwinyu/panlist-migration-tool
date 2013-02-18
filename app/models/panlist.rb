@@ -12,13 +12,11 @@ class Panlist < ActiveRecord::Base
   alias_attribute :id, :list_id
 
   attr_accessor :owners
-  # attr_accessor :subscribers
 
   attr_accessible :migrated, :name, :public, :subscribers
   has_and_belongs_to_many :owners
 
-  # attr_accessible :owners
-
+  # TODO(syu): modify to query LDAP / other service to return email addresses instead of netids
   def owners
     # set @owners instance variable by
     # 1) grabbing all Ownerships containing this panlist
@@ -39,8 +37,8 @@ class Panlist < ActiveRecord::Base
     self.members.size
   end
 
+  # TODO(syu): to be overriden with whatever function pulls in the flat list of subscriber addresses
   def members
-    # TODO(syu): to be overriden with whatever function pulls in the flat list of subscriber addresses
     subscribers.split
   end
 end

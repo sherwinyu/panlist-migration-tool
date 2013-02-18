@@ -13,7 +13,7 @@ describe PanlistsController do
   # in order to pass any filters (e.g. authentication) defined in
   # PanlistsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {cas_user: 'sy23'}
   end
 
   before :all do
@@ -52,7 +52,7 @@ describe PanlistsController do
 
       it "should only let you migrate a list you own"
 
-      it "should be set with proper owners and name from the corresponding panlist" do
+      it "should initialize elilist from panlist" do
         assigns(:elilist).should be_a_new Elilist
         assigns(:elilist).name.should eq @panlist.name
         assigns(:elilist).owners_raw.should eq @panlist.owners.map(&:netid) * "\n"

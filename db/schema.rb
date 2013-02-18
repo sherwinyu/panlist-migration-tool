@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214053929) do
+ActiveRecord::Schema.define(:version => 20130218002231) do
 
   create_table "elilists", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130214053929) do
     t.string   "list_id"
     t.string   "subscribers_raw"
     t.string   "owners_raw"
+    t.string   "description"
   end
 
   create_table "owners", :force => true do |t|

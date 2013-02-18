@@ -2,7 +2,7 @@ require 'gappsprovisioning/provisioningapi.rb'
 
 class Elilist < ActiveRecord::Base
   include GAppsProvisioning
-  attr_accessible :list_type, :name, :list_id, :owners_raw, :subscribers_raw
+  attr_accessible :list_type, :name, :list_id, :description, :owners_raw, :subscribers_raw
   # attr_accessor :owners, :subscribers
 
   def google_group_type
@@ -14,7 +14,7 @@ class Elilist < ActiveRecord::Base
       end
   end
   def google_group_id
-    val = self.list_id || self.name
+    val = self.list_id || self.name || ""
     # dasherize the id
     val.gsub /\s+/, "-"
   end
@@ -57,13 +57,12 @@ class Elilist < ActiveRecord::Base
   end
 
   def google_group_create
-     Elilist.google_api.create_group self.google_group_id, [name, 'just a description', self.google_group_type]
+    Elilist.google_api.create_group self.google_group_id, [name, 'just a description', self.google_group_type]
   end
 
   def self.google_api
-    adminuser =  "sherwin.yu@gsbx.yale.edu"
-    adminuser =  "sherwin@communificiency.com"
-    password  = Plmt::Application.config.google_data_pw
+    adminuser = Plmt::Application.config.google_data_username
+    password  = Plmt::Application.config.google_data_password
     @google_api ||= ProvisioningApi.new(adminuser, password)
   end
 

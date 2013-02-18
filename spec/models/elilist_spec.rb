@@ -53,9 +53,14 @@ describe Elilist do
     describe "google_group_create" do
       it "should make the underlying api call" do
         @e1 = Elilist.find_by_name 'directorslist'
-        GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:create_group).with(
+
+        google = double("GAppsProvisioning::ProvisioningApi")
+        Elilist.should_receive(:google_api).and_return google
+
+        google.should_receive(:create_group).with(
           'directorslist', ['directorslist', 'just a description', 'Owner']
         ).and_return true
+
         @e1.google_group_create
       end
     end
@@ -63,9 +68,14 @@ describe Elilist do
     describe "google_group_add_member" do
       it "should make the underlying api call" do
         @e1 = Elilist.find_by_name 'directorslist'
-        GAppsProvisioning::ProvisioningApi.any_instance.should_receive(:add_member_to_group).with(
+
+        google = double("GAppsProvisioning::ProvisioningApi")
+        Elilist.should_receive(:google_api).and_return google
+
+        google.should_receive(:add_member_to_group).with(
           'valid_email@yale.edu', @e1.google_group_id
         ).and_return true
+
         @e1.google_group_add_member "valid_email@yale.edu"
       end
     end

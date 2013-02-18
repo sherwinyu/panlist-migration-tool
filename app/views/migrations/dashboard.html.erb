@@ -1,15 +1,20 @@
-<h1> Welcome, <%= @owner.netid %> </h1>
-<h2> Here r ur lists lol </h2>
+<h2> Welcome, <%= @owner.netid %> </h2>
 
-<% @lists.each do |list|  %>
-  <div class="well">
-    list name: <%= list.name %> <br> 
-    <%= pluralize list.num_members, 'member' %> <br>
-    type: <%= list.public? ? 'Public' : 'Private' %>  <br>
-    owners: <%= list.owners.map &:netid %>
-  <%= link_to "Manage this list", migrate_panlist_path(list) %>
-  </div>
+<% if @lists.present? %>
 
+  <% @lists.each do |list|  %>
+    <div class="well">
+      Panlist name: <%= list.name %> <br> 
+      <%= pluralize list.num_members, 'member' %> <br>
+      Panlist type: <%= list.public? ? 'Public' : 'Private' %>  <br>
+      Panlist owners: <ol> <% list.owners.each do |owner| %>
+        <li><%= owner.netid%> </li>
+      <% end %></ol> 
+    <%= link_to "Manage this list", migrate_panlist_path(list) %>
+    </div>
+  <% end %>
+<% else %>
+  No lists.
 <% end %>
 
 
